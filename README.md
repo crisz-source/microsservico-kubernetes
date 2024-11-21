@@ -1,2 +1,3 @@
-# Preparando os microsservicos feitos em java para contianers
-- 
+# Projeto feito com java e spring
+Este projeto foi feito pela equipe da alura, é um projeto de microsserviços e eu migrei para microsserviços em kubernetes, para simular um cluster eu realizei toda estrutura em cima de um cluster local utilizando o minikube. A aplicação foi feita em java, 4 partes feitas em java sendo elas, uma parte de pagamentos (uma central de pagamentos), uma central de pedidos, um gateway de acesso para acessar a aplicação e tudo que chegar nesse gateway ele vai basicamente distribuir para os demais microsserviços corretos caso tenha muita requisição e por fim, o Eureka, um seviço de descoberta para descobrir onde esta os microsserviços e facilitando a comunicação entre eles.
+
