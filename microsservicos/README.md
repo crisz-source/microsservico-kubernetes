@@ -41,7 +41,7 @@ git status
 sleep 3
 
 # Adiciona todos os arquivos alterados
-echo "== Git Add =="
+echo "== Git Add . =="
 git add .
 sleep 3
 
