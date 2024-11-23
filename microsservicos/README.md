@@ -38,20 +38,25 @@ CURRENT_DATE=$(date +"%d/%m/%Y %H:%M:%S")
 # Exibe o status do Git
 echo "== Git Status =="
 git status
+sleep 3
 
 # Adiciona todos os arquivos alterados
 echo "== Git Add =="
 git add .
+sleep 3
 
 # Cria o commit com a data atual como mensagem
 echo "== Git Commit =="
 git commit -m "$CURRENT_DATE"
+sleep 3
 
 # Realiza o push para o branch principal (main)
 echo "== Git Push =="
 git push origin main
+sleep 3 
 
 echo "== Git completo =="
+
 
 ```
 - shell para o git pull, ./git-pull-main.sh
@@ -65,10 +70,12 @@ echo "== Git Pull: baixando atualizações da branch main =="
 
 # Executa o pull da branch main
 git pull origin main
+sleep 3 
 
 # Verifica o status após o pull
 echo "== Status Atual do Repositório =="
 git status
+sleep 3 
 
 echo "== Git pull feito! =="
 ```
