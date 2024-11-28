@@ -81,4 +81,27 @@ echo "== Git pull feito! =="
 ```
 
 
-# Configuranado o banco de dados... em construção
+# Volumes
+- Criar volumes para armazenar dados, para isso, criei uma pasta chamada k8s tanto para os volumes e arquivos do kubernetes
+- Para que o volume funcione corretamente com o csi-hostpath-sc, será necessário ativar o csi-hostpath-sc do minikube
+```bash
+# abrindo as listas de addons
+minikube addons list
+
+# ativando o driver
+minikube addons enable csi-hostpath-driver
+```
+
+# Configuranado o banco de dados
+- Criei os volumes e configuerei para que eles possam acessar e armazenar dados com os volumes 
+- É necessário configurar o service do statefulsets, para que e aplicação consiga acessar o banco de dados através do serviço. 
+- Criei uma secret para armazenar informações do banco e foi utilizado o type Opaque, para que não fique tudo aberto igual os configmap
+- com tudo configurado, execute:
+```bash
+kubectl apply -f k8s/volumes.yml -f k8s/mysql.yml -f k8s/secrets.yml
+```
+
+# Subindo a aplicação
+
+
+
