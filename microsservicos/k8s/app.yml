@@ -16,9 +16,9 @@ spec:
     spec:
       containers:
         - name: gateway
-          image: crisdockerz/java-gateway-microsservico:v1
+          image: crisdockerz/java-gateway-microsservico:v3
           ports:
-            - containerPort: 80
+            - containerPort: 8082
           env:
             - name: SERVER_HOST
               valueFrom:
@@ -34,7 +34,7 @@ metadata:
   labels:
     app: pagamentos
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: pagamentos
@@ -45,7 +45,7 @@ spec:
     spec:
       containers:
       - name: pagamentos
-        image: crisdockerz/java-pagamentos-microsservico:v1
+        image: crisdockerz/java-pagamentos-microsservico:v3
         ports:
           - containerPort: 80
         env:
@@ -72,7 +72,7 @@ metadata:
   labels:
     app: pedidos
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: pedidos
@@ -83,7 +83,7 @@ spec:
     spec:
       containers:
       - name: pedidos
-        image: crisdockerz/java-pedidos-microsservico:v1
+        image: crisdockerz/java-pedidos-microsservico:v3
         ports:
           - containerPort: 80
         env:
@@ -121,7 +121,7 @@ spec:
     spec:
       containers:
       - name: server
-        image: crisdockerz/java-server-microsservico:v2
+        image: crisdockerz/java-server-microsservico:v4
         ports:
           - containerPort: 8081
         env:

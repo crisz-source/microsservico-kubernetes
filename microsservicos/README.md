@@ -132,6 +132,15 @@ minikube tunnel --bind-address=xxx.xxx.xxx.x
 # Conectando a aplicação com o eureka
 - Acesse o eureka com endereço informado no --bind-address=xxx neste endereço: xxx.xxx.xxx.x:8081 
 - Note que vai abrir uma interface do eureka e vai conseguir observar o que esta rodando
+- nas configurações do java, alterei o localhost que acessava o eureka para receber uma variável de ambiente que é o SERVER_HOST, fiz essa alteração em todos os serviços, gateway, pedidos... etc
+- foi criado um serviço próprio para o eureka no arquivo de services
+- com isso, refiz a build para aplicar as correções do eureka
+```bash
 
+kubectl apply -f k8s/volumes.yml -f k8s/mysql.yml -f k8s/secrets.yml -f k8s/configmap.yml -f k8s/app.yml -f k8s/loadbalancer.yml -f k8s/services.yml
 
+```
 
+# segundo loadbalancer para acessar a aplicação via eureka
+- Para que a aplicação funcione corretamente, é necessário habilitar o csi-hostpath-driver do minikube
+- Criei um segundo loadbalancer para acessar os serviços através do gateway, para conectar outros serviços
