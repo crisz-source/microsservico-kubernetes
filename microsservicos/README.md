@@ -96,12 +96,42 @@ minikube addons enable csi-hostpath-driver
 - Criei os volumes e configuerei para que eles possam acessar e armazenar dados com os volumes 
 - É necessário configurar o service do statefulsets, para que e aplicação consiga acessar o banco de dados através do serviço. 
 - Criei uma secret para armazenar informações do banco e foi utilizado o type Opaque, para que não fique tudo aberto igual os configmap
-- com tudo configurado, execute:
+- com tudo configurado, execute para que as configurações funcione corretamente:
 ```bash
 kubectl apply -f k8s/volumes.yml -f k8s/mysql.yml -f k8s/secrets.yml
 ```
 
 # Subindo a aplicação
+- Foi criado um deployment para subir os serviços e adicionei as imagens armazenadas que estão no meu dockerhub, essas imagens sao publicas.
+- Criado um configmap para acessar o eureka, ou seja, uma secret para o banco de dados, e configmap para acessar o eureka
+- startando os serviços e instalando a dashboard do minikube
+```bash
+kubectl apply -f k8s/volumes.yml -f k8s/mysql.yml -f k8s/secrets.yml -f k8s/configmap.yml -f k8s/app.yml -f k8s/loadbalancer.yml
+
+# dashboard
+minikube dashboard
+```
+
+# Acessando a aplicação
+- Configurar as portas dos coitainers para que possa acessar o serviço eureka, que vai mostrar quais serviços estão conseguindo se comunicar
+- essa modificação foi feita no dockerfile do server, que seria apenas o EXPOSE 8081 que é a porta da aplicação
+
+# LoadBalancer
+- Criei um loadbalancer do próprio minikube para acessar a aplicação eureka
+- Nele foi definido, o service, nome do service, as portas que o service vai rodar e a porta do container que o serviço vai encaminhar, selecionando com o selector qual deployment vai utilizar o loadbalancer e o tipo do serviço que é loadbalancer.
+- inicinado a aplicação e abrindo um tunel no minikube para ter acesso ao eureka
+```bash
+kubectl apply -f k8s/volumes.yml -f k8s/mysql.yml -f k8s/secrets.yml -f k8s/configmap.yml -f k8s/app.yml -f k8s/loadbalancer.yml
+
+# abrindo tunel
+minikube tunnel --bind-address=xxx.xxx.xxx.x
+
+# o --bind-address=xxxxx precisa ser o ip da sua máquina
+```
+
+# Conectando a aplicação com o eureka
+- Acesse o eureka com endereço informado no --bind-address=xxx neste endereço: xxx.xxx.xxx.x:8081 
+- Note que vai abrir uma interface do eureka e vai conseguir observar o que esta rodando
 
 
 
