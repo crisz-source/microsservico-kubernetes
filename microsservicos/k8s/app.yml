@@ -47,7 +47,7 @@ spec:
       - name: pagamentos
         image: crisdockerz/java-pagamentos-microsservico:v3
         ports:
-          - containerPort: 80
+          - containerPort: 40000
         env:
         - name: DB_HOST
           valueFrom:
@@ -85,7 +85,7 @@ spec:
       - name: pedidos
         image: crisdockerz/java-pedidos-microsservico:v3
         ports:
-          - containerPort: 80
+          - containerPort: 40001
         env:
         - name: DB_HOST
           valueFrom:
