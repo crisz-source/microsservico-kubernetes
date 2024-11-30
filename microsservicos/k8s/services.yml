@@ -25,3 +25,31 @@ spec:
   clusterIP: None
   selector:
     app: server
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pagamentos
+  labels:
+    app: pagamentos
+spec:
+  ports:
+  - port: 40000
+    name: pagamentos
+  clusterIP: None
+  selector:
+    app: pagamentos
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pedidos
+  labels:
+    app: pedidos
+spec:
+  ports:
+  - port: 40001
+    name: pedidos
+  clusterIP: None
+  selector:
+    app: pedidos

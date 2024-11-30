@@ -5,32 +5,32 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: mysql # has to match .spec.template.metadata.labels
+      app: mysql
   serviceName: "mysql"
-  replicas: 1 # by default is 1
-  minReadySeconds: 10 # by default is 0
+  replicas: 1
+  minReadySeconds: 10
   template:
     metadata:
       labels:
-        app: mysql # has to match .spec.selector.matchLabels
+        app: mysql
     spec:
       terminationGracePeriodSeconds: 10
       containers:
-        - name: mysql
-          image: mysql:8
-          ports:
-          - containerPort: 3306
-            name: mysql
-          volumeMounts:
-          - name: mysql-pv
-            mountPath: /var/lib/mysql
-          env:
-            - name: MYSQL_ROOT_PASSWORD
-              valueFrom: 
-                secretKeyRef:  
-                  name: senhas
-                  key: DB_PASSWORD
+      - name: mysql
+        image: mysql:8
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: mysql-pv
+          mountPath: /var/lib/mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: senhas
+              key: DB_PASSWORD
       volumes:
-        - name: mysql-pv 
-          persistentVolumeClaim:
-            claimName: volume-mysql
+      - name: mysql-pv
+        persistentVolumeClaim:
+          claimName: volume-mysql
